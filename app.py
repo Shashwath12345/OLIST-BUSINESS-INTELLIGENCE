@@ -1303,7 +1303,7 @@ if page == "🚚 Delivery Analysis":
     page_header(
         "Delivery & Fulfilment",
         "Monitor delivery speed, estimated-vs-actual performance and late orders",
-        "🚚",
+        "🚚....",
     )
 
     orders = data["orders"].copy()
