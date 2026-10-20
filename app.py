@@ -13,7 +13,7 @@ from src.gemini_ai import ask_gemini
 
 st.set_page_config(
     page_title="Olist Business Intelligence",
-    page_icon="📊",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -147,7 +147,7 @@ def compact_number(value):
     return f"{value:,.0f}"
 
 
-def page_header(title, subtitle, icon="📊"):
+def page_header(title, subtitle, icon=""):
     st.markdown(f'<div class="section-label">OLIST BUSINESS INTELLIGENCE</div>', unsafe_allow_html=True)
     st.title(f"{icon} {title}")
     st.markdown(f'<div class="page-subtitle">{subtitle}</div>', unsafe_allow_html=True)
@@ -171,7 +171,7 @@ def sales_filters(df, key_prefix="sales"):
     """Render reusable interactive filters for sales-based analysis."""
     filtered = df.copy()
 
-    with st.expander("🎛️ Interactive Filters", expanded=True):
+    with st.expander("️ Interactive Filters", expanded=True):
         c1, c2, c3 = st.columns(3)
 
         with c1:
@@ -240,7 +240,7 @@ def customer_filters(df, key_prefix="customer"):
     """Render geographic filters for customer analysis."""
     filtered = df.copy()
 
-    with st.expander("🎛️ Customer Filters", expanded=True):
+    with st.expander("️ Customer Filters", expanded=True):
         c1, c2 = st.columns(2)
 
         with c1:
@@ -290,7 +290,7 @@ def customer_filters(df, key_prefix="customer"):
 # =========================================================
 
 with st.sidebar:
-    st.title("📊 Olist BI")
+    st.title(" Olist BI")
     st.caption("Brazilian E-Commerce Analytics")
 
     st.markdown("**EXECUTIVE**")
@@ -298,18 +298,19 @@ with st.sidebar:
     page = st.radio(
         "Navigate to",
         [
-            "🏠 Overview",
-            "👥 Customer Analysis",
-            "💰 Sales Analysis",
-            "🏷️ Category Analysis",
-            "📦 Product Analysis",
-            "🏪 Seller Analysis",
-            "💳 Payment Analysis",
+            " Overview",
+            " Customer Analysis",
+            " Sales Analysis",
+            "️ Category Analysis",
+            " Product Analysis",
+            " Seller Analysis",
+            " Payment Analysis",
             "⭐ Review Analysis",
-            "🚚 Delivery Analysis",
-            "📚 Data & Methodology",
-            "💡 Business Insights",
-            "🤖 Gemini AI",
+            " Delivery Analysis",
+            " What-If Simulator",
+            " Data & Methodology",
+            " Business Insights",
+            " Gemini AI",
         ],
         label_visibility="collapsed",
     )
@@ -343,12 +344,12 @@ for geo_col in ["customer_state", "customer_city"]:
 # OVERVIEW
 # =========================================================
 
-if page == "🏠 Overview":
+if page == " Overview":
 
     page_header(
         "Olist Business Intelligence",
         "Executive overview of Olist's Brazilian e-commerce marketplace",
-        "📊",
+        "",
     )
 
     # ---------------------------------------------------------
@@ -466,7 +467,7 @@ if page == "🏠 Overview":
     chart_left, chart_right = st.columns([1.65, 1])
 
     with chart_left:
-        section_title("📈 Monthly Sales Trend")
+        section_title(" Monthly Sales Trend")
 
         st.line_chart(
             monthly_sales,
@@ -475,7 +476,7 @@ if page == "🏠 Overview":
         )
 
     with chart_right:
-        section_title("🏷️ Top Categories by Sales")
+        section_title("️ Top Categories by Sales")
 
         st.bar_chart(
             category_sales.sort_values(ascending=True),
@@ -492,7 +493,7 @@ if page == "🏠 Overview":
     seller_left, seller_right = st.columns([1, 1])
 
     with seller_left:
-        section_title("🏪 Top 10 Sellers by Sales")
+        section_title(" Top 10 Sellers by Sales")
 
         st.bar_chart(
             seller_sales.sort_values(ascending=True),
@@ -501,7 +502,7 @@ if page == "🏠 Overview":
         )
 
     with seller_right:
-        section_title("📊 Executive Metrics")
+        section_title(" Executive Metrics")
 
         st.markdown(
             f"""
@@ -531,7 +532,7 @@ if page == "🏠 Overview":
     # KEY BUSINESS SIGNALS
     # ---------------------------------------------------------
 
-    st.markdown("### 💡 Key Business Signals")
+    st.markdown("###  Key Business Signals")
 
     signal1, signal2, signal3 = st.columns(3)
 
@@ -551,7 +552,7 @@ if page == "🏠 Overview":
         st.markdown(
             f"""
             <div class="insight-box">
-                <b>🏷️ Leading Category</b><br>
+                <b>️ Leading Category</b><br>
                 {top_category}<br>
                 <small>{compact_currency(category_sales.iloc[0]) if len(category_sales) else "N/A"} in sales</small>
             </div>
@@ -563,7 +564,7 @@ if page == "🏠 Overview":
         st.markdown(
             f"""
             <div class="insight-box">
-                <b>🏪 Leading Seller</b><br>
+                <b> Leading Seller</b><br>
                 {top_seller}<br>
                 <small>{compact_currency(seller_sales.iloc[0]) if len(seller_sales) else "N/A"} in sales</small>
             </div>
@@ -575,7 +576,7 @@ if page == "🏠 Overview":
         st.markdown(
             f"""
             <div class="insight-box">
-                <b>🚚 Delivery Signal</b><br>
+                <b> Delivery Signal</b><br>
                 {late_rate:.1f}% late delivery rate<br>
                 <small>Based on orders with delivery and estimated-delivery dates</small>
             </div>
@@ -610,12 +611,12 @@ if page == "🏠 Overview":
 # CUSTOMER ANALYSIS
 # =========================================================
 
-if page == "👥 Customer Analysis":
+if page == " Customer Analysis":
 
     page_header(
         "Customer Analysis",
         "Understand customer distribution and geographic concentration",
-        "👥",
+        "",
     )
 
     st.caption(
@@ -680,7 +681,7 @@ if page == "👥 Customer Analysis":
         else:
             st.info("No customers match the selected filters.")
 
-    st.markdown("### 💡 Business Interpretation")
+    st.markdown("###  Business Interpretation")
 
     if len(customers_by_state):
         leading_state = customers_by_state.index[0]
@@ -702,7 +703,7 @@ if page == "👥 Customer Analysis":
             unsafe_allow_html=True,
         )
 
-    st.markdown("### 📋 Filtered Customer Data")
+    st.markdown("###  Filtered Customer Data")
     st.dataframe(
         customers_filtered.head(500),
         use_container_width=True,
@@ -720,12 +721,12 @@ if page == "👥 Customer Analysis":
 # SALES ANALYSIS
 # =========================================================
 
-if page == "💰 Sales Analysis":
+if page == " Sales Analysis":
 
     page_header(
         "Sales Analysis",
         "Track sales volume, order activity and average order value over time",
-        "💰",
+        "",
     )
 
     st.caption(
@@ -779,17 +780,17 @@ if page == "💰 Sales Analysis":
         left, right = st.columns(2)
 
         with left:
-            section_title("📈 Monthly Revenue")
+            section_title(" Monthly Revenue")
             st.line_chart(monthly_sales, use_container_width=True, height=350)
 
         with right:
-            section_title("📦 Monthly Orders")
+            section_title(" Monthly Orders")
             st.line_chart(monthly_orders, use_container_width=True, height=350)
 
-        section_title("💳 Monthly Average Order Value")
+        section_title(" Monthly Average Order Value")
         st.line_chart(monthly_aov, use_container_width=True, height=350)
 
-        st.markdown("### 💡 Business Interpretation")
+        st.markdown("###  Business Interpretation")
 
         peak_sales_month = monthly_sales.idxmax()
         peak_sales_value = monthly_sales.max()
@@ -809,7 +810,7 @@ if page == "💰 Sales Analysis":
             unsafe_allow_html=True,
         )
 
-        st.markdown("### 📋 Filtered Sales Data")
+        st.markdown("###  Filtered Sales Data")
         st.dataframe(
             filtered_sales.head(500),
             use_container_width=True,
@@ -826,12 +827,12 @@ if page == "💰 Sales Analysis":
 # CATEGORY ANALYSIS
 # =========================================================
 
-if page == "🏷️ Category Analysis":
+if page == "️ Category Analysis":
 
     page_header(
         "Category Analysis",
         "Compare product categories by revenue, order activity and contribution",
-        "🏷️",
+        "️",
     )
 
     st.caption("Business question: Which product categories generate the most revenue and order activity?")
@@ -883,7 +884,7 @@ if page == "🏷️ Category Analysis":
         top_category = category_summary.index[0]
         top_category_share = category_summary.loc[top_category, "Revenue"] / category_summary["Revenue"].sum() * 100
         st.info(
-            f"💡 **Business interpretation:** {top_category} is the highest-revenue category in the current view, "
+            f" **Business interpretation:** {top_category} is the highest-revenue category in the current view, "
             f"contributing approximately {top_category_share:.1f}% of category revenue. "
             "Category-level revenue concentration can help identify where merchandising and inventory decisions have the largest impact."
         )
@@ -894,12 +895,12 @@ if page == "🏷️ Category Analysis":
 # PRODUCT ANALYSIS
 # =========================================================
 
-if page == "📦 Product Analysis":
+if page == " Product Analysis":
 
     page_header(
         "Product Analysis",
         "Identify products driving revenue, orders and customer ratings",
-        "📦",
+        "",
     )
 
     st.caption("Business question: Which products generate high sales, and which high-sales products receive weaker ratings?")
@@ -969,7 +970,7 @@ if page == "📦 Product Analysis":
 
         top_product = product_summary.index[0]
         st.info(
-            f"💡 **Business interpretation:** Product {top_product} has the highest revenue in the current filtered view. "
+            f" **Business interpretation:** Product {top_product} has the highest revenue in the current filtered view. "
             "Revenue leaders can be monitored alongside order volume and ratings to distinguish strong demand from potential customer-experience issues."
         )
         download_csv(display_products, "olist_product_analysis.csv", "⬇️ Download Product Analysis")
@@ -979,12 +980,12 @@ if page == "📦 Product Analysis":
 # SELLER ANALYSIS
 # =========================================================
 
-if page == "🏪 Seller Analysis":
+if page == " Seller Analysis":
 
     page_header(
         "Seller Analysis",
         "Evaluate seller revenue, order volume and average order value",
-        "🏪",
+        "",
     )
 
     st.caption("Business question: Which sellers contribute the most revenue and orders, and how does seller AOV vary?")
@@ -1042,7 +1043,7 @@ if page == "🏪 Seller Analysis":
         top_seller = seller_summary.index[0]
         top_seller_share = seller_summary.loc[top_seller, "Revenue"] / seller_summary["Revenue"].sum() * 100
         st.info(
-            f"💡 **Business interpretation:** Seller {top_seller} is the largest revenue contributor in the current view, "
+            f" **Business interpretation:** Seller {top_seller} is the largest revenue contributor in the current view, "
             f"accounting for approximately {top_seller_share:.1f}% of seller revenue. "
             "Seller concentration and AOV can be monitored when evaluating marketplace performance."
         )
@@ -1052,12 +1053,12 @@ if page == "🏪 Seller Analysis":
 # PAYMENT ANALYSIS
 # =========================================================
 
-if page == "💳 Payment Analysis":
+if page == " Payment Analysis":
 
     page_header(
         "Payment Analysis",
         "Understand payment preferences, transaction volume and instalments",
-        "💳",
+        "",
     )
 
     payments = data["payments"]
@@ -1151,7 +1152,7 @@ if page == "⭐ Review Analysis":
     if "order_id" in reviews.columns and "order_id" in order_context.columns:
         reviews = reviews.merge(order_context, on="order_id", how="left")
 
-    with st.expander("🎛️ Review Filters", expanded=True):
+    with st.expander("️ Review Filters", expanded=True):
         c1, c2, c3 = st.columns(3)
 
         with c1:
@@ -1267,7 +1268,7 @@ if page == "⭐ Review Analysis":
                 hide_index=True,
             )
 
-        section_title("💡 Business Interpretation")
+        section_title(" Business Interpretation")
         if average_review >= 4:
             review_comment = "Overall customer satisfaction is relatively strong, with the average rating at or above 4/5."
         elif average_review >= 3:
@@ -1298,12 +1299,12 @@ if page == "⭐ Review Analysis":
 # DELIVERY ANALYSIS
 # =========================================================
 
-if page == "🚚 Delivery Analysis":
+if page == " Delivery Analysis":
 
     page_header(
         "Delivery & Fulfilment",
         "Monitor delivery speed, estimated-vs-actual performance and late orders",
-        "🚚",
+        "",
     )
 
     orders = data["orders"].copy()
@@ -1347,7 +1348,7 @@ if page == "🚚 Delivery Analysis":
     if "order_id" in order_context.columns and "order_id" in orders.columns:
         orders = orders.merge(order_context, on="order_id", how="left")
 
-    with st.expander("🎛️ Delivery Filters", expanded=True):
+    with st.expander("️ Delivery Filters", expanded=True):
         c1, c2, c3 = st.columns(3)
 
         with c1:
@@ -1501,7 +1502,7 @@ if page == "🚚 Delivery Analysis":
                 delay_display[col] = delay_display[col].round(1)
         st.dataframe(delay_display, use_container_width=True, hide_index=True)
 
-        section_title("💡 Business Interpretation")
+        section_title(" Business Interpretation")
         if late_rate <= 10:
             delivery_comment = "The filtered orders show a relatively low late-delivery rate; operational attention can focus on the specific states or categories with higher delay rates."
         elif late_rate <= 20:
@@ -1538,16 +1539,344 @@ if page == "🚚 Delivery Analysis":
             "⬇️ Download Filtered Delivery Data",
         )
 
+# =========================================================
+# WHAT-IF SIMULATOR
+# =========================================================
+
+if page == " What-If Simulator":
+
+    page_header(
+        "What-If Simulator",
+        "Test how changes in order volume and average order value could affect revenue",
+        "",
+    )
+
+    st.caption(
+        "Use this tool to evaluate hypothetical business scenarios using "
+        "the historical Olist revenue baseline."
+    )
+
+    st.info(
+        "This is a scenario analysis tool, not a forecast. "
+        "The simulation assumes the historical relationship between "
+        "orders, AOV and revenue remains constant."
+    )
+
+    # =====================================================
+    # BASELINE
+    # =====================================================
+
+    baseline_revenue = sales["price"].sum()
+    baseline_orders = sales["order_id"].nunique()
+
+    baseline_aov = (
+        baseline_revenue / baseline_orders
+        if baseline_orders > 0
+        else 0
+    )
+
+    st.markdown("###  Historical Baseline")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "Baseline Revenue",
+            compact_currency(baseline_revenue)
+        )
+
+    with col2:
+        st.metric(
+            "Baseline Orders",
+            compact_number(baseline_orders)
+        )
+
+    with col3:
+        st.metric(
+            "Baseline AOV",
+            f"R$ {baseline_aov:,.2f}"
+        )
+
+    # =====================================================
+    # SCENARIO INPUTS
+    # =====================================================
+
+    st.markdown("### ️ Build Your Scenario")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        order_change = st.slider(
+            "Order Volume Change",
+            min_value=-30,
+            max_value=50,
+            value=10,
+            step=5,
+            format="%d%%",
+            key="whatif_order_change"
+        )
+
+    with col2:
+
+        aov_change = st.slider(
+            "Average Order Value Change",
+            min_value=-20,
+            max_value=30,
+            value=10,
+            step=5,
+            format="%d%%",
+            key="whatif_aov_change"
+        )
+
+    # =====================================================
+    # CALCULATIONS
+    # =====================================================
+
+    simulated_orders = (
+        baseline_orders * (1 + order_change / 100)
+    )
+
+    simulated_aov = (
+        baseline_aov * (1 + aov_change / 100)
+    )
+
+    simulated_revenue = (
+        simulated_orders * simulated_aov
+    )
+
+    revenue_change = (
+        simulated_revenue - baseline_revenue
+    )
+
+    revenue_change_pct = (
+        revenue_change / baseline_revenue * 100
+        if baseline_revenue > 0
+        else 0
+    )
+
+    # =====================================================
+    # RESULTS
+    # =====================================================
+
+    st.markdown("###  Scenario Results")
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+
+        st.metric(
+            "Simulated Revenue",
+            compact_currency(simulated_revenue),
+            delta=f"{revenue_change_pct:+.1f}%"
+        )
+
+    with col2:
+
+        st.metric(
+            "Revenue Change",
+            compact_currency(revenue_change),
+            delta=f"{revenue_change_pct:+.1f}%"
+        )
+
+    with col3:
+
+        st.metric(
+            "Simulated Orders",
+            compact_number(simulated_orders),
+            delta=f"{order_change:+d}%"
+        )
+
+    with col4:
+
+        st.metric(
+            "Simulated AOV",
+            f"R$ {simulated_aov:,.2f}",
+            delta=f"{aov_change:+d}%"
+        )
+
+    # =====================================================
+    # REVENUE IMPACT
+    # =====================================================
+
+    st.markdown("###  Revenue Impact")
+
+    comparison = pd.DataFrame(
+        {
+            "Scenario": [
+                "Baseline",
+                "Simulated"
+            ],
+            "Revenue": [
+                baseline_revenue,
+                simulated_revenue
+            ]
+        }
+    ).set_index("Scenario")
+
+    st.bar_chart(
+        comparison,
+        use_container_width=True,
+        height=350
+    )
+
+    # =====================================================
+    # SENSITIVITY MATRIX
+    # =====================================================
+
+    st.markdown("###  Revenue Sensitivity Matrix")
+
+    order_scenarios = [-20, -10, 0, 10, 20, 30]
+
+    aov_scenarios = [-10, 0, 10, 20, 30]
+
+    sensitivity = pd.DataFrame(
+        index=[
+            f"{x:+d}% Orders"
+            for x in order_scenarios
+        ],
+        columns=[
+            f"{x:+d}% AOV"
+            for x in aov_scenarios
+        ],
+        dtype=float
+    )
+
+    for order_pct in order_scenarios:
+
+        for aov_pct in aov_scenarios:
+
+            scenario_revenue = (
+                baseline_revenue
+                * (1 + order_pct / 100)
+                * (1 + aov_pct / 100)
+            )
+
+            sensitivity.loc[
+                f"{order_pct:+d}% Orders",
+                f"{aov_pct:+d}% AOV"
+            ] = scenario_revenue
+
+    st.dataframe(
+        sensitivity.style.format("R$ {:,.0f}"),
+        use_container_width=True
+    )
+
+    st.caption(
+        "Each cell represents estimated revenue under the corresponding "
+        "order-volume and AOV changes."
+    )
+
+    # =====================================================
+    # MANAGEMENT INTERPRETATION
+    # =====================================================
+
+    st.markdown("###  Management Interpretation")
+
+    if revenue_change_pct > 0:
+
+        if order_change > 0 and aov_change > 0:
+
+            interpretation = (
+                f"The selected scenario increases both order volume and "
+                f"average order value, resulting in an estimated revenue "
+                f"increase of {revenue_change_pct:.1f}%. "
+                "Management could pursue this through customer acquisition, "
+                "conversion improvement and higher-value purchases."
+            )
+
+        elif order_change > 0:
+
+            interpretation = (
+                f"The scenario is primarily driven by order growth. "
+                f"A {order_change:+d}% change in orders results in an "
+                f"estimated revenue change of {revenue_change_pct:+.1f}% "
+                "when AOV remains constant."
+            )
+
+        elif aov_change > 0:
+
+            interpretation = (
+                f"The scenario is primarily driven by increasing customer "
+                f"order value. A {aov_change:+d}% AOV improvement results "
+                f"in an estimated revenue change of {revenue_change_pct:+.1f}% "
+                "when order volume remains constant."
+            )
+
+        else:
+
+            interpretation = (
+                f"The selected scenario results in an estimated revenue "
+                f"increase of {revenue_change_pct:.1f}%."
+            )
+
+    elif revenue_change_pct < 0:
+
+        interpretation = (
+            f"The selected scenario reduces estimated revenue by "
+            f"{abs(revenue_change_pct):.1f}%. Management should consider "
+            "whether the reduction in orders, AOV, or both can be mitigated "
+            "through customer retention, pricing or conversion strategies."
+        )
+
+    else:
+
+        interpretation = (
+            "The selected scenario produces no change from the historical baseline."
+        )
+
+    st.markdown(
+        f"""
+        <div class="insight-box">
+            <b>Scenario Takeaway</b><br>
+            {interpretation}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # =====================================================
+    # DOWNLOAD RESULTS
+    # =====================================================
+
+    scenario_output = pd.DataFrame(
+        [
+            [
+                "Baseline",
+                baseline_orders,
+                baseline_aov,
+                baseline_revenue
+            ],
+            [
+                "Simulated",
+                simulated_orders,
+                simulated_aov,
+                simulated_revenue
+            ]
+        ],
+        columns=[
+            "Scenario",
+            "Orders",
+            "AOV",
+            "Revenue"
+        ]
+    )
+
+    download_csv(
+        scenario_output,
+        "olist_what_if_scenario.csv",
+        "⬇️ Download Scenario Results"
+    )
 
 # DATA & METHODOLOGY
 # =========================================================
 
-if page == "📚 Data & Methodology":
+if page == " Data & Methodology":
 
     page_header(
         "Data & Methodology",
         "How the Olist dataset is prepared, modelled and analysed in this dashboard",
-        "📚",
+        "",
     )
 
     st.markdown("### Business Question")
@@ -1621,12 +1950,12 @@ if page == "📚 Data & Methodology":
 # BUSINESS INSIGHTS
 # =========================================================
 
-if page == "💡 Business Insights":
+if page == " Business Insights":
 
     page_header(
         "Business Insights",
         "Evidence-based signals generated directly from the dashboard's calculated metrics",
-        "💡",
+        "",
     )
 
     st.markdown("### Executive Insight Summary")
@@ -1731,12 +2060,12 @@ if page == "💡 Business Insights":
 # GEMINI AI BUSINESS ANALYST
 # =========================================================
 
-if page == "🤖 Gemini AI":
+if page == " Gemini AI":
 
     page_header(
         "Gemini AI Business Analyst",
         "Ask questions about Olist's business data and receive AI-assisted analysis grounded in calculated evidence",
-        "🤖",
+        "",
     )
 
     st.info(
@@ -1821,7 +2150,7 @@ if page == "🤖 Gemini AI":
         key="gemini_business_question",
     )
 
-    if st.button("🔍 Analyze", use_container_width=False, key="gemini_analyze_button"):
+    if st.button(" Analyze", use_container_width=False, key="gemini_analyze_button"):
 
         if question.strip():
             q = question.lower()
@@ -1912,17 +2241,17 @@ QUESTION-SPECIFIC EVIDENCE:
                 try:
                     answer = ask_gemini(question, business_context)
 
-                    st.markdown("### 📊 Data Evidence Used")
+                    st.markdown("###  Data Evidence Used")
                     for evidence in evidence_sections:
                         st.code(evidence, language="text")
 
-                    st.markdown("### 🤖 Gemini Analysis")
+                    st.markdown("###  Gemini Analysis")
                     st.markdown(
                         f'<div class="insight-box">{answer}</div>',
                         unsafe_allow_html=True,
                     )
 
-                    st.markdown("### 💡 Interpretation")
+                    st.markdown("###  Interpretation")
                     st.caption(
                         "Gemini provides the explanation layer. The numerical evidence above is calculated by the dashboard "
                         "before the response is generated."
