@@ -6,7 +6,7 @@ __pycache__/
 .DS_Store
 
 # Local datasets and generated outputs
-data/*
+
 !data/.gitkeep
 
 app_backup.py
